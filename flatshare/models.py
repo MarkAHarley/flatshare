@@ -34,7 +34,7 @@ class UserProfile(models.Model):
     course = models.CharField(max_length=30, unique=False)
     location = models.CharField(max_length=128, unique=False)
     bio = models.CharField(max_length = 200, unique=False)
-    #picture = models.ImageField(upload_to='profile_images', blank=True)
+    picture = models.ImageField(upload_to='profile_images', blank=True)
     phone_no = models.IntegerField(default=888, unique=True)
     age = models.IntegerField(default=18)
 

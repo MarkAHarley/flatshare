@@ -1,0 +1,25 @@
+{% extends 'flatshare/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+    Home
+{% endblock %}
+
+{% block body_block %}
+<div>
+{% if flat %}
+    <ul>
+        <li>{{ flat.name }}</li>
+        <li>{{ flat.address }}</li>
+        <li>{{ flat.rent }}</li>
+        <li>{{ flat.owner }}</li>
+        <li>{{ flat.description }}</li>
+        <li>{{ flat.available_from }}</li>
+        <img src="{{ MEDIA_URL }}{{ flat.image1 }}">
+        <img src="{{ MEDIA_URL }}{{ flat.image2 }}">
+    </ul>
+{% else %}
+    <strong>There are no flats present.</strong>
+{% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends 'flatshare/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+    {{ user_profile.user }}'s Matches
+{% endblock %}
+
+{% block body_block %}
+    <div>
+        {% if flat_matches %}
+            <li>
+                {% for flat in flat_matches %}
+                    {{ flat.name }}
+                {% endfor %}
+            </li>
+        {% else %}
+            <strong>No flat matches available</strong>
+        {% endif %}
+    </div>
+{% endblock %}

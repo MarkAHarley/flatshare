@@ -1,0 +1,26 @@
+{% extends 'flatshare/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+    Available Flats
+{% endblock %}
+
+{% block body_block %}
+    <h1>Available Flats</h1>
+    <div>
+    {% if flats %}
+        <ul>
+        {% for flat in flats %}
+            <li>{{ flat }}</li>
+            <a href="{{ flat.slug }}/">Details...</a><br />
+        {% endfor %}
+        </ul>
+    {% else %}
+        <strong>There are no flats present.</strong>
+    {% endif %}
+    </div>
+
+    <div>
+        <a href="/">Back to Home</a><br />
+    </div>
+{% endblock %}

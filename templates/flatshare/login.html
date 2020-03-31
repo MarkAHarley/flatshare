@@ -1,0 +1,20 @@
+{% extends 'flatshare/base.html' %}
+{% load staticfiles %} 
+
+{% block title_block %}
+    Login
+{% endblock %}
+
+{% block body_block %}
+<div class = "login-form">
+    <h2>Login to Flatshare</h2>
+    <form id ="login_form" method = "post" action = "{% url 'flatshare:login' %}">
+        {% csrf_token %}
+        <input type= "text" name="username" placeholder = "Enter Username" size = "50">
+        <br />
+        <input type= "text" name="password" placeholder = "Enter Password" size = "50">
+        <br />
+        <button type="submit">Login</button>
+    </form>
+</div>
+{% endblock %}

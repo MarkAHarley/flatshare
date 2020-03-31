@@ -1,18 +1,49 @@
 <!DOCTYPE html>
 {% load staticfiles %}
-<html>
+<html lang="en">
     <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}">
+        <link href="https://fonts.googleapis.com/css?family=Satisfy|Trade+Winds&display=swap" rel="stylesheet">
         <title>
             Flatshare -
             {% block title_block %}
                 WAD2 project
             {% endblock %}            
         </title>
-        <body>
-            <div>
-                {% block body_block %}
-                {% endblock %}
-            </div>
-        </body>
     </head>
+    <body>
+        <div class="header">
+            <div class="nav_bar">
+                <ul>
+                    <li style = "padding-bottom:0"><h1 class = "logo">FLAT SHARE</h1></li>
+                    <li class="active"><a href="{% url 'flatshare:index' %}">Home</a></li>
+                    <li><a href="{% url 'flatshare:list_flats' %}">Available Flats</a></li>
+                    <li><a href="{% url 'flatshare:add_flat' %}">Add a New Flat</a></li>
+                    <li><a href="{% url 'flatshare:about' %}">About Us</a></li>
+                    <li><a href="{% url 'flatshare:contact' %}">Contact Us</a></li>
+                    
+                    {% if user.is_authenticated %}
+                        <li style = "float:right"><a href="{% url 'flatshare:view_profile' user_slug=user %}">My Profile</a></li>
+                        <li style = "float:right"><a href="{% url 'flatshare:logout' %}">Log out</a></li>
+                    {% else %}
+                        <li style = "float:right"><a href="{% url 'flatshare:login' %}">Log in</a></li>
+                        <li style = "float:right"><a href="{% url 'flatshare:signup' %}">Sign up</a></li>
+                    {% endif %}  
+                </ul>
+            </div>
+        </div>
+        <div class = "container">
+            {% block body_block %}
+            {% endblock %}
+        </div>
+        <div class="footer">
+            <ul>
+                <li><a href="{% url 'flatshare:index' %}">Terms Of Use</a></li>
+                <li><a href="">Privacy Policy</a></li>
+                <li class="right"><a href="#about_us">About Us</a></li>
+                <li class="right"><a href="">Contact Us</a></li>
+            </ul>
+        </div>
+    </body>
 </html>

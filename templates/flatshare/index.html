@@ -1,20 +1,65 @@
 {% extends 'flatshare/base.html' %}
-{% load staticfiles %} 
+{% load staticfiles %}
 
 {% block title_block %}
     Home
 {% endblock %}
 
 {% block body_block %}
-<div>
-	<h1>Flatshare</h1>
-	<a href="flatshare/login">Login</a><br />
-	<a href="flatshare/about">About</a><br />
-</div>
+	<div class="homeImage">
+		<img src="{% static 'images/room2.jpg' %}" alt="picture of room"/>
+	</div>
 
-<div>
-	<h1>Apartment 1</h1>
-	<h5> yes i know this is ugly and wrong, im just testing the static images thingy</h5>
-	<img src="{% static 'images/apartment1.jpg' %}" alt="Picture of Apartment 1" />
-</div>
+	<div class="content1">
+		<h1> Share A Flat</h1>
+	</div>
+	<div class="content2">
+		<h2 name="about_us">Our Services</h2>
+		<div class='par-1'>
+			<h3>Service 1</h3>
+			<p>
+				Lorem ipsum dolor sit amet, <br/>
+				consectetur adipiscing elit, sed do eiusmod<br/>
+				tempor incididunt ut labore et dolore magna aliqua.<br/>
+				ad minim veniam, quis nostrud exercitation ullamco <br/>
+				aliquip ex ea commodo consequat. Duis aute <br/>
+				irure dolor in reprehenderit in velit <br/>
+				esse cillum dolore eu fugiat nulla<br/>
+				pariatur. Excepteur sint occaecat <br/>
+				cupidatat non proident, sunt <br/>
+				in culpa qui officia <a href="">Link</a>.
+			</p>
+		</div>
+		<div class='par-2'>
+			<h3>Service 2</h3>
+			<p>
+				Lorem ipsum dolor sit amet, <br/>
+				consectetur adipiscing elit, sed do eiusmod<br/>
+				tempor incididunt ut labore et dolore magna aliqua.<br/>
+				ad minim veniam, quis nostrud exercitation ullamco <br/>
+				aliquip ex ea commodo consequat. Duis aute <br/>
+				irure dolor in reprehenderit in velit <br/>
+				esse cillum dolore eu fugiat nulla<br/>
+				pariatur. Excepteur sint occaecat <br/>
+				cupidatat non proident, sunt <br/>
+				in culpa qui officia <a href="">Link</a>.
+			</p>
+		</div>
+		<div class='par-3'>
+			<h3>Service 3</h3>
+			<p>
+				Lorem ipsum dolor sit amet, <br/>
+				consectetur adipiscing elit, sed do eiusmod<br/>
+				tempor incididunt ut labore et dolore magna aliqua.<br/>
+				ad minim veniam, quis nostrud exercitation ullamco <br/>
+				aliquip ex ea commodo consequat. Duis aute <br/>
+				irure dolor in reprehenderit in velit <br/>
+				esse cillum dolore eu fugiat nulla<br/>
+				pariatur. Excepteur sint occaecat <br/>
+				cupidatat non proident, sunt <br/>
+				in culpa qui officia <a href="">Link</a>.
+			</p>
+		</div>
+	</div>
 {% endblock %}
+
