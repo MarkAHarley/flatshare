@@ -1,0 +1,9 @@
+.pyc
+.DB_Store
+__pycache__/
+*.sqlite3
+*.key
+thumbs.db
+*.jpg
+.idea/
+flatshare/migrations/
