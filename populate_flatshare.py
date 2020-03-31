@@ -94,6 +94,7 @@ def populate():
          },
         ]
 
+    ##GOING TO ADD LIKES HERE AND AUTOMATIC MATCH DETECTION ELSEWHERE LATER
 
     
 
@@ -136,13 +137,18 @@ def add_user(FirstName, LastName, email, course, location, bio, likes, matches, 
          return u
 
 def add_like(flat, user, flag = True):
-         l = Like.objects.get_or_create(direction_flag = flag, l_flat = flat, l_user = user)
+         l = Like.objects.get_or_create(like_id = uuid.uuid4())
+         l.l_flat = flat
+         l.l_user = user
+         l.directionflag = flag
 
          l.save()
          return l
 
 def add_match(flat, user):
-         m = Match.objects.get_or_create(m_flat = flat, m_user = user)
+         m = Match.objects.get_or_create(match_id = uuid.uuid4())
+         m.m_flat = flat
+         m.m_user = user
 
          m.save()
          return m

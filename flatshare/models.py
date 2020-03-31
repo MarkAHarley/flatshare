@@ -17,8 +17,8 @@ class Flat(models.Model):
 
     #owner = models.OneToOneField("UserProfile", on_delete=models.CASCADE)
 
-    #likes = models.ManyToManyField('Like')
-    #matches = models.ManyToManyField('Match')
+    likes = models.ManyToManyField('Like')
+    matches = models.ManyToManyField('Match')
     
 
     def __str__(self):
