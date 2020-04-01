@@ -12,7 +12,7 @@
         <ul>
         {% for flat in flats %}
             <li>{{ flat }}</li>
-            <a href="{{ flat.slug }}/">Details...</a><br />
+            <a href="{{ flat.flat_id }}/">Details...</a><br />
         {% endfor %}
         </ul>
     {% else %}

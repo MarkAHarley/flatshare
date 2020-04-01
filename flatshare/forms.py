@@ -2,6 +2,7 @@ from django import forms
 from django.utils.timezone import now
 from flatshare.models import Flat,Like, Match, UserProfile
 from django.contrib.auth.models import User
+
 '''
 class AddAddressForm(forms.ModelForm):
     help_text=("Please enter an address for your flat")
@@ -22,6 +23,7 @@ class AddFlatForm(forms.ModelForm,):
     help_text = ("Please enter flat details.")
     name = forms.CharField()
     rent = forms.IntegerField(initial=0)
+    address = forms.CharField()
     description = forms.TextInput()
     image1 = forms.ImageField(required=False)
     image2 = forms.ImageField(required=False)
@@ -30,7 +32,7 @@ class AddFlatForm(forms.ModelForm,):
     slug = forms.CharField(widget=forms.HiddenInput(), required=False)
     class Meta:
         model = Flat
-        fields = ('name', 'rent', 'description', 'image1', 'image2', 'available_from')
+        fields = ('name', 'rent','address', 'description', 'image1', 'image2', 'available_from')
 
 
 class UserForm(forms.ModelForm):
@@ -42,4 +44,4 @@ class UserForm(forms.ModelForm):
 class UserProfileForm(forms.ModelForm): 
     class Meta:
         model = UserProfile
-        fields = ('FirstName', 'LastName', 'picture', 'phone_no', 'age')
+        fields = ('FirstName', 'LastName', 'picture','course','location','bio', 'phone_no', 'age')

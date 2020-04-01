@@ -6,6 +6,7 @@ from flatshare.models import Flat, UserProfile
 from flatshare.forms import AddFlatForm, UserProfileForm, UserForm
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import reverse
+from django.contrib.auth.models import User
 
 
 def index(request):
@@ -84,12 +85,12 @@ def signup(request):
                   context={'user_form': user_form, 'profile_form': profile_form, 'registered': registered})
 
 
-def view_profile(request, user_slug):
+def view_profile(request, username):
     context_dict = {}
     try:
-        user_profile = UserProfile.objects.get(slug=user_slug)
+        user = User.objects.get(username=username)
+        user_profile = UserProfile.objects.get(user=user)
         context_dict['user_profile'] = user_profile
-        context_dict['owned_flats'] = user_profile.user.flat_set
     except UserProfile.DoesNotExist:
         context_dict['user_profile'] = None
     return render(request, 'flatshare/user.html', context=context_dict)
@@ -107,35 +108,28 @@ def my_matches(request):
 
 def add_flat(request):
     if request.user.is_authenticated:
-        address_form = AddAddressForm()
         form = AddFlatForm()
 
         if request.method == 'POST':
-            address_form = AddAddressForm(request.POST)
             form = AddFlatForm(request.POST)
 
-            if all((address_form.is_valid(), form.is_valid())):
-                address = address_form.save(commit=True)
-                print(address)
+            if (form.is_valid()):
+            
                 flat = form.save(commit=False)
-                print(flat)
-                flat.address = address
-                flat.owner = request.user
                 flat.save()
                 return redirect('/')
             else:
                 print('YIKES')
-                print(address_form.errors)
                 print(form.errors)
-        return render(request, 'flatshare/add_flat.html', {'address_form': address_form, 'form': form, })
+        return render(request, 'flatshare/add_flat.html', {'form': form, })
     else:
         return HttpResponse("please log in first!")
 
 
-def show_flat(request, flat_slug):
+def show_flat(request, flat_id):
     context_dict = {}
     try:
-        flat = Flat.objects.get(slug=flat_slug)
+        flat = Flat.objects.get(flat_id=flat_id)
         context_dict['flat'] = flat
     except Flat.DoesNotExist:
         context_dict['flat'] = None

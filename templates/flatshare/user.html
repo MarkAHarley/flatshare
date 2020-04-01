@@ -8,6 +8,7 @@
 {% block body_block %}
     <div>
         {% if user_profile %}
+	<p> {{user_profile}} </p>
             <ul>
                 <li>{{ user_profile.FirstName }} {{ user_profile.LastName }}</li>
                 <img src="{{ MEDIA_URL }}{{ user_profile.picture }}">

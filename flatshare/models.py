@@ -27,10 +27,8 @@ class Flat(models.Model):
 
 class UserProfile(models.Model):
     NAME_MAX_CHAR = 128
-    user_id = models.UUIDField(primary_key=True, editable=False, default=uuid.uuid4())
     FirstName = models.CharField(max_length=NAME_MAX_CHAR, unique=False)
     LastName = models.CharField(max_length=NAME_MAX_CHAR, unique=False)
-    email = models.CharField(max_length=30, unique=True)
     course = models.CharField(max_length=30, unique=False)
     location = models.CharField(max_length=128, unique=False)
     bio = models.CharField(max_length = 200, unique=False)
@@ -38,10 +36,14 @@ class UserProfile(models.Model):
     phone_no = models.IntegerField(default=888, unique=True)
     age = models.IntegerField(default=18)
 
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+
     u_flat = models.OneToOneField(Flat, on_delete=models.CASCADE,default=None, null = True)
 
     likes = models.ManyToManyField('Like')
     matches = models.ManyToManyField('Match')
+
+        
 
     def __str__(self):
         return self.FirstName + " " + self.LastName

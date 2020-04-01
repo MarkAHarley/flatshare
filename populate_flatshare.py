@@ -1,11 +1,13 @@
 import os
 import uuid
 
+
 os.environ.setdefault('DJANGO_SETTINGS_MODULE','flatshare_project.settings')
 
 import django
 django.setup()
 from flatshare.models import UserProfile, Flat, Like, Match
+from django.contrib.auth.models import User
 
 def populate():
 
@@ -46,7 +48,8 @@ def populate():
          'flat': flats[0],
          'likes':None,
          'matches':None,
-         'phone':123
+         'phone':123,
+         'password':'mark'
          },
         {'FirstName':'Adam',
          'LastName':'Simpson',
@@ -57,7 +60,8 @@ def populate():
          'flat': flats[1],
          'likes':None,
          'matches':None,
-         'phone':1234567
+         'phone':1234567,
+         'password':'adam'
          },
         {'FirstName':'Neil',
          'LastName':'Campbell',
@@ -68,7 +72,8 @@ def populate():
          'flat': flats[2],
          'likes':None,
          'matches':None,
-         'phone':12345
+         'phone':12345,
+         'password':'neil'
          },
         {'FirstName':'Douglas',
          'LastName':'Russell',
@@ -79,7 +84,9 @@ def populate():
          'flat': None,
          'likes':None,
          'matches':None,
-         'phone':12345678
+         'phone':12345678,
+         'password': 'douglas'
+         
          },
         {'FirstName':'Matthew',
          'LastName':'Harrison',
@@ -90,7 +97,8 @@ def populate():
          'flat': None,
          'likes':None,
          'matches':None,
-         'phone':432
+         'phone':432,
+         'password': 'matthew'
          },
         ]
 
@@ -100,12 +108,12 @@ def populate():
 
     for user in users:
         if user['flat'] != None:
-            u = add_user(user['FirstName'],user['LastName'],user['email'],user['course'],
+            u = add_user(user['FirstName'],user['LastName'],user['email'],user['password'], user['course'],
                          user['location'],user['bio'],user['likes'],user['matches'],user['phone'],
                          flat = add_flat(user['flat']['address'],user['flat']['postcode'],
                                         user['flat']['rent'], user['flat']['description']))
         else:
-            u = add_user(user['FirstName'],user['LastName'],user['email'],user['course'],
+            u = add_user(user['FirstName'],user['LastName'],user['email'],user['password'], user['course'],
                          user['location'],user['bio'],user['likes'],user['matches'],user['phone'])
 
     
@@ -121,14 +129,13 @@ def add_flat(address, postcode, rent, description):
          f.save()
          return f
 
-def add_user(FirstName, LastName, email, course, location, bio, likes, matches, phone_no, flat = None):
-         u = UserProfile.objects.get_or_create(user_id = uuid.uuid4(),phone_no = phone_no,email=email)[0]
+def add_user(FirstName, LastName, email, password, course, location, bio, likes, matches, phone_no, flat = None):
+         u = User.objects.get_or_create(username = FirstName+LastName,password=password,email=email)[0]
          #u.likes.set(likes)
          #u.matches.set(matches)
          u.flat = flat
          u.FirstName = FirstName
          u.LastName = LastName
-         u.email = email
          u.course = course
          u.location = location
          u.bio = bio
